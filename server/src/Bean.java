@@ -35,10 +35,12 @@ class Line{
     }
 }
 class Price{
-    int from,to,price;
-    public Price(int from, int to, int price) {
+    int from,to,price,linecode;
+
+    public Price(int from, int to, int price, int linecode) {
         this.from = from;
         this.to = to;
         this.price = price;
+        this.linecode = linecode;
     }
 }

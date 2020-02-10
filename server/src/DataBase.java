@@ -51,14 +51,14 @@ public class DataBase {
         }
         return all;
     }
-    static List<String> allStop(){
+    static List<Integer> allStop(){
         getConnection();
-        List<String> stops = new ArrayList<String>();
+        List<Integer> stops = new ArrayList<Integer>();
         try {
             PreparedStatement p = conn.prepareStatement(findAllStop);
             ResultSet res = p.executeQuery();
             while (res.next()){
-                stops.add(res.getString("name"));
+                stops.add(res.getInt("code"));
             }
         }catch (Exception e){
             e.printStackTrace();
