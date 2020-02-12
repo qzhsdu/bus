@@ -5,6 +5,7 @@ class Stop {
     String name;
     double x,y;
     int code;
+
     public Stop(String name, double x, double y,int code) {
         this.name = name;
         this.x = x;
@@ -17,7 +18,7 @@ class Line{
     int code;
     int price;
     List<Stop> stops;
-
+    double speed =10;
     public Line(String name, int code, int price) {
         this.name = name;
         this.code = code;
@@ -30,7 +31,11 @@ class Line{
         }
         String[] ss = stop.split("\\+");
         for(String s : ss){
-            stops.add(DataBase.getStop(s));
+            Stop temp = DataBase.getStop(s);
+            if(temp==null){
+                System.out.println(this.name+"-------"+s);
+            }
+            stops.add(temp);
         }
     }
 }

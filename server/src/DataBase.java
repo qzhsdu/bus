@@ -5,8 +5,10 @@ import java.util.List;
 public class DataBase {
     static Connection conn;
     static String findStopByName = "SELECT * FROM stops WHERE name = ?";
-    static String findAllLine = "SELECT * FORM data";
-    static String findAllStop = "SELECT * FROM stops order code";
+    static String findStopByCode = "SELECT * FROM stops WHERE code = ?";
+    static String findAllLine = "SELECT * FROM  data";
+    static String findAllStop = "SELECT * FROM stops order by code";
+    static String findLineByCode = "SELECT * FROM data WHERE 编号 = ?";
     static void getConnection(){
         try {
             if(conn==null){
@@ -34,6 +36,7 @@ public class DataBase {
         }
         return null;
     }
+
     static List<Line> getLines(){
         getConnection();
         List<Line> all = new ArrayList<Line>();
@@ -65,7 +68,39 @@ public class DataBase {
         }
         return stops;
     }
-    static public void main(String[] args){
 
+    static Stop getStopbyCode(int code){
+        getConnection();
+        try{
+            PreparedStatement p = conn.prepareStatement(findStopByCode);
+            p.setInt(1,code);
+            ResultSet res =  p.executeQuery();
+            if(res.next()){
+                return new Stop(res.getString("name"),
+                        res.getDouble("x"),res.getDouble("y"),res.getInt("code"));
+            }
+        }catch (Exception e){
+            e.printStackTrace();
+        }
+        return null;
     }
+
+    static Line getLinebyCode(int code){
+        getConnection();
+        try{
+            PreparedStatement p = conn.prepareStatement(findLineByCode);
+            p.setInt(1,code);
+            ResultSet res =  p.executeQuery();
+            if(res.next()){
+                Line now = new Line(res.getString("线路名"),
+                        res.getInt("编号"),res.getInt("价格"));
+                now.setStops(res.getString("路线"));
+                return now;
+            }
+        }catch (Exception e){
+            e.printStackTrace();
+        }
+        return null;
+    }
+
 }

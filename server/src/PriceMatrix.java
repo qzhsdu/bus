@@ -6,17 +6,22 @@ public class PriceMatrix {
     List<Line> all;
     Map<String, Price> price;
 
-    public PriceMatrix(List<Line> all) {
+    public PriceMatrix() {
         this.all = DataBase.getLines();
         price = new HashMap<String, Price>();
+        work();
     }
 
     void work() {
         for (Line line : all) {
             for (Stop stop : line.stops) {
                 for (Stop to : line.stops) {
-                    if (stop.code > to.code) {
+
+                    if (stop.code >= to.code) {
                         continue;
+                    }
+                    if(stop.code==353&&to.code==735){
+                        System.out.println(line.name);
                     }
                     String key = stop.code + "-" + to.code;
                     Price value;
