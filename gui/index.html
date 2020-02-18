@@ -1,0 +1,63 @@
+ <!DOCTYPE html>
+  <html>
+    <head>
+      <!--Import Google Icon Font-->
+      <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+      <!--Import materialize.css-->
+      <link type="text/css" rel="stylesheet" href="css/materialize.min.css"  media="screen,projection"/>
+
+      <!--Let browser know website is optimized for mobile-->
+      <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+    </head>
+
+    <body>
+        <div class="container">
+            <h1 class="grey-text" style="text-align: center;">山东大学数据结构课设</h1>
+        
+        <div class="row">
+            <div class="col s4">
+                <div>from</div>
+                <div class="input-field col s12">
+                    <i class="material-icons prefix">textsms</i>
+                    <input type="text" id="from_stop" class="autocomplete">
+                    <label for="autocomplete-input">自动完成</label>
+                  </div>
+            </div>
+            <div class="col s4">
+                <div>to</div>
+                <div class="input-field col s12">
+                    <i class="material-icons prefix">textsms</i>
+                    <input type="text" id="to_stop" class="autocomplete">
+                    <label for="autocomplete-input">自动完成</label>
+                  </div>
+            </div>
+            <div>
+                <span>interval</span>
+            </div>
+            <div class="btn">commit</div>
+        </div>
+        <div class="row">
+            <div class="card-panel">
+                <span class="green-text">card test</span>
+            </div>
+        </div>
+        <div class="grey-text">路线展示</div>
+        <div class="card-panel pink">
+            <div class="row">
+            <span>resresresres</span>
+            </div>
+        </div>
+      <!--JavaScript at end of body for optimized loading-->
+      <script type="text/javascript" src="js/materialize.min.js"></script>
+      <script type="text/javascript">
+        $('from_stop').autocomplete({
+            data:{
+                "a":"A",
+                "bb":"a",
+                "sda":"ada"
+            }
+        })
+      </script>
+    </body>
+  </html>
+    
