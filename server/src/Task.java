@@ -7,13 +7,13 @@ import java.util.*;
 public class Task {
     static int STOP_NUM = 1511;
 
-    static void findCheap(String fromStop, String toStop){
+    static A findCheap(String fromStop, String toStop){
         PriceMatrix matrixMaker = new PriceMatrix();
         matrixMaker.work();
         Map<String, Price> priceMatrix = matrixMaker.price;
         Stop from = DataBase.getStop(fromStop);
         Stop to = DataBase.getStop(toStop);
-        List<Integer> allStop = DataBase.allStop();
+        List<Integer> allStop = DataBase.allStopCode();
         int[] dis = new int[STOP_NUM];
         int[] path = new int[STOP_NUM];
         int[] line = new int[STOP_NUM];
@@ -58,26 +58,30 @@ public class Task {
             cur = path[cur];
         }
         stops.push(from.code);
+        A cheap = new A(dis[to.code],-1);
         while(!lines.empty()){
             int now_x = stops.pop();
+            cheap.stops.add(DataBase.getStopbyCode(now_x).name);
             int now_y = stops.peek();
-            System.out.println(DataBase.getStopbyCode(now_x).name+
-                    DataBase.getStopbyCode(now_y).name);
-            Line temp = DataBase.getLinebyCode(lines.pop());
-            Boolean f = false;
-            System.out.println(temp.name);
-            for(Stop s : temp.stops){
-                if(s.code==now_x||s.code==now_y){
-                    f = !f;
-                    System.out.println(s.name);
-                    continue;
-                }
-                if(f){
-                    System.out.println(s.name);
-                }
-            }
+            cheap.stops.add(DataBase.getStopbyCode(now_y).name);
+            cheap.lines.add(DataBase.getLinebyCode(lines.pop()));
+//            System.out.println(DataBase.getStopbyCode(now_x).name+
+//                    DataBase.getStopbyCode(now_y).name);
+//            Line temp = DataBase.getLinebyCode(lines.pop());
+//            Boolean f = false;
+//            System.out.println(temp.name);
+//            for(Stop s : temp.stops){
+//                if(s.code==now_x||s.code==now_y){
+//                    f = !f;
+//                    System.out.println(s.name);
+//                    continue;
+//                }
+//                if(f){
+//                    System.out.println(s.name);
+//                }
+//            }
         }
-
+        return cheap;
     }
 
     static void findFast(String fromStop, String toStop,int interval){
@@ -85,7 +89,7 @@ public class Task {
         Map<String, Fast> m = timeMatrixMaker.map;
         Stop from = DataBase.getStop(fromStop);
         Stop to = DataBase.getStop(toStop);
-        List<Integer> allStop = DataBase.allStop();
+        List<Integer> allStop = DataBase.allStopCode();
         double[] dis = new double[STOP_NUM];
         int[] path = new int[STOP_NUM];
         int[] line = new int[STOP_NUM];

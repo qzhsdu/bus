@@ -54,7 +54,7 @@ public class DataBase {
         }
         return all;
     }
-    static List<Integer> allStop(){
+    static List<Integer> allStopCode(){
         getConnection();
         List<Integer> stops = new ArrayList<Integer>();
         try {
@@ -62,6 +62,21 @@ public class DataBase {
             ResultSet res = p.executeQuery();
             while (res.next()){
                 stops.add(res.getInt("code"));
+            }
+        }catch (Exception e){
+            e.printStackTrace();
+        }
+        return stops;
+    }
+    static List<Stop> allStop(){
+        getConnection();
+        List<Stop> stops = new ArrayList<Stop>();
+        try {
+            PreparedStatement p = conn.prepareStatement(findAllStop);
+            ResultSet res = p.executeQuery();
+            while (res.next()){
+                stops.add(new Stop(res.getString("name"),
+                        res.getDouble("x"),res.getDouble("y"),res.getInt("code")));
             }
         }catch (Exception e){
             e.printStackTrace();

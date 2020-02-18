@@ -35,10 +35,56 @@ class Stop {
     }
 }
 class Line{
+    @JSONField(name = "name")
     String name;
+    @JSONField(name = "code")
     int code;
+    @JSONField(name = "price")
     int price;
+    @JSONField(name = "stops")
     List<Stop> stops;
+
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    public int getCode() {
+        return code;
+    }
+
+    public void setCode(int code) {
+        this.code = code;
+    }
+
+    public int getPrice() {
+        return price;
+    }
+
+    public void setPrice(int price) {
+        this.price = price;
+    }
+
+    public List<Stop> getStops() {
+        return stops;
+    }
+
+    public void setStops(List<Stop> stops) {
+        this.stops = stops;
+    }
+
+    public double getSpeed() {
+        return speed;
+    }
+
+    public void setSpeed(double speed) {
+        this.speed = speed;
+    }
+
+    @JSONField(name ="speed")
     double speed =10;
     public Line(String name, int code, int price) {
         this.name = name;
@@ -79,5 +125,54 @@ class Fast{
         this.to = to;
         this.linecode = linecode;
         this.time = time;
+    }
+}
+class A{
+    @JSONField(name = "price")
+    double price;
+    @JSONField(name = "time")
+    double time;
+    @JSONField(name = "lines")
+    List<Line> lines;
+    @JSONField(name = "stops")
+    List<String> stops;
+
+    public A(double price, double time) {
+        this.price = price;
+        this.time = time;
+        lines = new ArrayList<>();
+        stops = new ArrayList<>();
+    }
+
+    public double getPrice() {
+        return price;
+    }
+
+    public void setPrice(double price) {
+        this.price = price;
+    }
+
+    public double getTime() {
+        return time;
+    }
+
+    public void setTime(double time) {
+        this.time = time;
+    }
+
+    public List<Line> getLines() {
+        return lines;
+    }
+
+    public void setLines(List<Line> lines) {
+        this.lines = lines;
+    }
+
+    public List<String> getStops() {
+        return stops;
+    }
+
+    public void setStops(List<String> stops) {
+        this.stops = stops;
     }
 }
