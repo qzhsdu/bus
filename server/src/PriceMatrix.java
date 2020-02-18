@@ -16,12 +16,8 @@ public class PriceMatrix {
         for (Line line : all) {
             for (Stop stop : line.stops) {
                 for (Stop to : line.stops) {
-
                     if (stop.code >= to.code) {
                         continue;
-                    }
-                    if(stop.code==353&&to.code==735){
-                        System.out.println(line.name);
                     }
                     String key = stop.code + "-" + to.code;
                     Price value;

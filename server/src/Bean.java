@@ -1,11 +1,32 @@
+import com.alibaba.fastjson.annotation.JSONField;
+
 import java.util.ArrayList;
 import java.util.List;
 
 class Stop {
+    @JSONField(name = "stop_name")
     String name;
-    double x,y;
+
+    @JSONField(name = "stop_code")
     int code;
 
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    public int getCode() {
+        return code;
+    }
+
+    public void setCode(int code) {
+        this.code = code;
+    }
+
+    double x,y;
     public Stop(String name, double x, double y,int code) {
         this.name = name;
         this.x = x;
@@ -47,5 +68,16 @@ class Price{
         this.to = to;
         this.price = price;
         this.linecode = linecode;
+    }
+}
+class Fast{
+    int from,to;int linecode;
+    double time;
+
+    public Fast(int from, int to, int linecode, double time) {
+        this.from = from;
+        this.to = to;
+        this.linecode = linecode;
+        this.time = time;
     }
 }
