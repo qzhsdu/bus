@@ -62,8 +62,8 @@ public class Task {
         while(!lines.empty()){
             int now_x = stops.pop();
             cheap.stops.add(DataBase.getStopbyCode(now_x).name);
-            int now_y = stops.peek();
-            cheap.stops.add(DataBase.getStopbyCode(now_y).name);
+//            int now_y = stops.peek();
+//            cheap.stops.add(DataBase.getStopbyCode(now_y).name);
             cheap.lines.add(DataBase.getLinebyCode(lines.pop()));
 //            System.out.println(DataBase.getStopbyCode(now_x).name+
 //                    DataBase.getStopbyCode(now_y).name);
@@ -84,7 +84,7 @@ public class Task {
         return cheap;
     }
 
-    static void findFast(String fromStop, String toStop,int interval){
+    static A findFast(String fromStop, String toStop,int interval){
         FastMatrix timeMatrixMaker = new FastMatrix();
         Map<String, Fast> m = timeMatrixMaker.map;
         Stop from = DataBase.getStop(fromStop);
@@ -103,7 +103,6 @@ public class Task {
             if(vis[now.stop]){
                 continue;
             }
-//            System.out.print(DataBase.getStopbyCode(now.stop).name+"\n-----");
             vis[now.stop] = true;
             for(int e : allStop){
                 String key = now.stop>e?e+"-"+now.stop:now.stop+"-"+e;
@@ -113,35 +112,33 @@ public class Task {
                 Fast l = m.get(key);
                 double distnew = dis[now.stop]+l.time+l.linecode==now.line?0:interval;
                 if(dis[e]>distnew){
-//                    System.out.println(DataBase.getStopbyCode(e).name);
-//                    if(e==735){
-//                        System.out.println(l.linecode);
-//                        System.out.println(DataBase.getStopbyCode(now).name);
-//                    }
-
                     dis[e] = dis[now.stop]+l.time;
                     path[e] = now.stop;
                     line[e] = l.linecode;
                     q.add(new K(e,l.linecode));
                 }
             }
-//            System.out.println("------------");
         }
+
         int cur = to.code;
+        A a = new A(-1,dis[to.code]);
+//        a.stops.add(to.name);
         while(cur!=0&&cur!=from.code){
             try{
+                a.stops.add(DataBase.getStopbyCode(cur).name);
+                a.lines.add(DataBase.getLinebyCode(line[cur]));
                 System.out.println(DataBase.getStopbyCode(cur).name+"\nline:"+DataBase.getLinebyCode(line[cur]).name);
             }catch (Exception e){
-                System.out.println(cur);
-                System.out.println(line[cur]);
+                e.printStackTrace();
             }
-
             cur = path[cur];
         }
-        System.out.println(dis[to.code]);
+        a.stops.add(from.name);
+        Collections.reverse(a.stops);
+        return a;
     }
     static public void main(String[] args){
-
+        Task.findFast("齐鲁软件学院","东仓",2000);
         String json = JSON.toJSONString(DataBase.getStop("大明湖"));
         System.out.println(json);
     }
