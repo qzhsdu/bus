@@ -1,5 +1,0 @@
-f = open("stop.txt","r")
-data = f.readlines()
-print(len(data))
-unique = set(data)
-print(len(unique))
