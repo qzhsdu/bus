@@ -12,6 +12,7 @@ public class FastQ extends HttpServlet {
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         request.setCharacterEncoding("utf-8");
         response.setCharacterEncoding("utf-8");
+        response.setHeader("Access-Control-Allow-Origin","*");
         String from = request.getParameter("from");
         String to = request.getParameter("to");
         int interval  = Integer.valueOf(request.getParameter("interval"));

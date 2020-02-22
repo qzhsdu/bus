@@ -81,6 +81,7 @@ public class Task {
 //                }
 //            }
         }
+        cheap.stops.add(to.name);
         return cheap;
     }
 
@@ -125,6 +126,13 @@ public class Task {
 //        a.stops.add(to.name);
         while(cur!=0&&cur!=from.code){
             try{
+                String lastLine = "";
+                if(a.lines.size()>0){
+                    lastLine = a.lines.get(a.lines.size()-1).name;
+                }
+                if(DataBase.getLinebyCode(line[cur]).name==lastLine){
+                    continue;
+                }
                 a.stops.add(DataBase.getStopbyCode(cur).name);
                 a.lines.add(DataBase.getLinebyCode(line[cur]));
                 System.out.println(DataBase.getStopbyCode(cur).name+"\nline:"+DataBase.getLinebyCode(line[cur]).name);
@@ -135,6 +143,7 @@ public class Task {
         }
         a.stops.add(from.name);
         Collections.reverse(a.stops);
+        Collections.reverse(a.lines);
         return a;
     }
     static public void main(String[] args){

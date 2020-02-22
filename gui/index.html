@@ -1,10 +1,14 @@
 <!DOCTYPE html>
-<html>
+<html lang="zh">
 <head>
     <meta charset="utf-8">
     <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <link type="text/css" rel="stylesheet" href="css/k.css">
     <link type="text/css" rel="stylesheet" href="css/materialize.min.css" media="screen,projection"/>
     <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+    <script type="text/javascript" src="js/jquery-3.4.1.min.js"></script>
+
+    <title>bus</title>
 </head>
 
 <body>
@@ -13,14 +17,15 @@
     <div class="row">
         <div class="col s4">
             <div class="card-panel">
+                <div class="title">起始点</div>
                 <div class="row">
                     <div class="input-field col s12">
-                        <input type="text" id="from-input" class="autocomplete">
+                        <input type="text" id="from-input" class="autocomplete" value="齐鲁软件学院">
                         <label for="from-input">起点</label>
                     </div>
                     <div class="input-field col s12">
-                        <input type="text" id="autocomplete-input" class="autocomplete">
-                        <label for="autocomplete-input">自动完成</label>
+                        <input type="text" id="to-input" class="autocomplete" value="大明湖">
+                        <label for="to-input">终点</label>
                     </div>
                     <div class="col">
 
@@ -31,10 +36,10 @@
 
         <div class="col s4">
             <div class="card-panel">
-                <div class="grey-text">
+                <div class="title">
                     方式
                 </div>
-                <form action="#">
+                <form action="#" id="choice">
                     <p>
                         <label>
                             <input name="group1" type="radio" checked/>
@@ -43,29 +48,31 @@
                     </p>
                     <p>
                         <label>
-                            <input name="group1" type="radio"/>
+                            <input name="group1" type="radio" id="fast"/>
                             <span>时间最短</span>
                         </label>
                     </p>
-                    <input type="number" class="teal-text" id="interval">
+                    <input type="number" class="teal-text" id="interval" value="0">
                     <label for="interval">换乘间隔</label>
                 </form>
             </div>
         </div>
         <div class="col s4">
-            <div class="btn-large teal s4" style="text-align: center;margin:80px">搜索</div>
+            <div id="commit" class="btn-large teal s4" style="text-align: center;margin:80px">搜索</div>
         </div>
     </div>
     <div class="row">
-        <div class="card-panel">
-            <text class="grey-text">路线</text>
-            <div >KK11</div>
+        <div class="col s12">
+            <div class="card-panel">
+                <text class="title">路线</text>
+                <div id="detail">
+                </div>
+
+            </div>
         </div>
-
     </div>
-
-
     <script type="text/javascript" src="js/materialize.min.js"></script>
+    <script type="text/javascript" src="js/data.js"></script>
 </div>
 </body>
 </html>

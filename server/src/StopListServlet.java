@@ -13,6 +13,7 @@ public class StopListServlet extends HttpServlet {
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         req.setCharacterEncoding("gbk");
         resp.setCharacterEncoding("gbk");
+        resp.setHeader("Access-Control-Allow-Origin","*");
         String s = JSON.toJSONString(DataBase.allStop());
         resp.getWriter().write(s);
         return;
